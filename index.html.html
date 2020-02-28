@@ -1,0 +1,303 @@
+<link
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+  crossorigin="anonymous"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Lobster&display=swap"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Caladea|Roboto&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+  body {
+    background: #f09819; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #edde5d,
+      #f09819
+    ); /* Chrome 10-25, Safari 5.1-6 */
+   background: linear-gradient(462deg, #4af1b9, #5fab81 ); 
+    font-family: "Lobster";
+  }
+  #root {
+    background: #fff;
+    max-width:500px;
+  }
+  .input-group.md-form.form-sm.form-2 input.amber-border {
+    border: 2px solid #ffca28;
+    outline: none !important;
+    margin-top: 10px !important;
+  }
+  #root input {
+    outline: none !important;
+  }
+  .searchLabel {
+    background: #ffca28;
+    margin-top: 10px;
+    cursor: pointer;
+    outline: none !important;
+    color: white;
+  }
+
+  /* checkbox */
+  input[type="checkbox"] + label {
+    display: block;
+    margin: 0.2em;
+    cursor: pointer;
+    padding: 0.2em;
+    margin-bottom: 10px;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  input[type="checkbox"] + label:before {
+    content: "\2714";
+    border: 0.1em solid #000;
+    border-radius: 0.2em;
+    display: inline-block;
+    padding-bottom: 1.5em;
+    width: 1.5em;
+    height: 0.1em;
+    padding-left: 0.2em;
+    margin-right: 0.7em;
+    vertical-align: bottom;
+    color: transparent;
+    transition: 0.2s;
+  }
+
+  input[type="checkbox"] + label:active:before {
+    transform: scale(0);
+  }
+
+  input[type="checkbox"]:checked + label:before {
+    background-color: #efa122;
+    border-color: #efa122;
+    color: #fff;
+  }
+
+  input[type="checkbox"]:disabled + label:before {
+    transform: scale(1);
+    border-color: #aaa;
+  }
+
+  input[type="checkbox"]:checked:disabled + label:before {
+    transform: scale(1);
+    background-color: #bfb;
+    border-color: #bfb;
+  }
+  .title h1 {
+    color: #f85957;
+  }
+  .title {
+    padding-top: 15px;
+  }
+  .items {
+    /* display: flex;
+    justify-content: space-around; */
+    padding: 20px;
+    /* background: navajowhite; */
+  }
+  .items h2 {
+    color: #5bb88c;
+  }
+  /* .unpackedItems {
+    padding: 20px;
+    background: navajowhite;
+  }
+  .packedItems {
+    padding: 20px;
+    background: navajowhite;
+  } */
+
+  .piLIst {
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  /* button */
+  .btn-hover {
+    width: 80px;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    outline: none;
+  }
+
+  .btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+  }
+  .btn-hover.color-11 {
+    background-image: linear-gradient(
+      to right,
+      #eb3941,
+      #f15e64,
+      #e14e53,
+      #e2373f
+    );
+    box-shadow: 0 5px 15px rgba(242, 97, 103, 0.4);
+  }
+  .btn-hover.color-5 {
+    background:#2d96f1;
+    background-image: linear-gradient(173deg,#22799a,#28ebff);
+  }
+  .unpItemsTitle {
+    justify-content: space-between;
+  }
+</style>
+<div id="root" class="container">
+  <div class="title text-center">
+    <h1>TOUR PACKAGES</h1>
+  </div>
+  <div class="input-group md-form form-sm form-2 pl-0">
+    <input
+      class="form-control my-0 py-1 amber-border"
+      type="text"
+      placeholder="Items"
+      v-model="searchedText"
+    />
+    <div class="input-group-append">
+      <span
+        class="input-group-text amber lighten-3 searchLabel"
+        id="basic-text1"
+        @click="searchPackages"
+        >Search</span
+      >
+    </div>
+  </div>
+  <br /><br />
+  <div class="row" v-if="searchedText !=''">
+    <div class="col-md-3">
+      <h6>Searched Text:</h6>
+    </div>
+    <div class="col-md-8">
+      <h6 class="text-warning">{{searchedText}}</h6>
+    </div>
+      
+  </div>
+  <div class="items">
+    <div class="unpackedItems">
+      <div class="d-flex unpItemsTitle">
+        <h2>Unpacked items</h2>
+        <button
+          class="btn-hover color-5"
+          style="height: 25px;font-family: 'Roboto';"
+          @click="packCheckedPackages"
+        >
+          Add
+        </button>
+      </div>
+      <div class="upiList">
+        <form v-for="package in unpackedItems">
+          <div :v-key="package.id" >
+            <input type="checkbox"
+              :id="package.id"
+              name="package[]"
+              :value="package.id"
+              v-model="checked"
+            />
+            <label
+              :for="package.id"
+            >
+              {{package.name}}
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
+    <hr />
+    <div class="packedItems">
+      <h2>Packed items</h2>
+      <div class="piItems">
+        <ul v-for="package in packedItems">
+          <div class="piList d-flex" :v-key="package.id">
+            <li>{{package.name}}</li>
+            <button 
+              class="btn-hover color-11"
+              style="font-family: 'Roboto';"
+              @click="depackPackage(package.id)"
+            >
+              Remove
+            </button>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: '#root',
+    data:{
+        packages:[
+          {id:1, name: 'Package A', is_packed: false , is_hidden:false},
+          {id:2, name: 'Package B', is_packed: false, is_hidden:false},
+          {id:3, name: 'Package C', is_packed: true, is_hidden:false},
+          {id:4, name: 'Package D', is_packed: false, is_hidden:false},
+          {id:5, name: 'Package E', is_packed: false, is_hidden:false},
+          {id:6, name: 'Package F', is_packed: false, is_hidden:false}
+        ],
+        checked:[],
+        searchedText: ""
+    },
+    computed:{
+      packedItems:function(){
+        return this.packages.filter(x => x.is_packed && !x.is_hidden);
+      },
+      unpackedItems: function(){
+        return this.packages.filter(x => !x.is_packed && !x.is_hidden);
+      },
+
+    },
+    methods:{
+        packCheckedPackages:function(){
+          this.packages = this.packages.map(this.packSelected);
+          this.resetChecked();
+        },
+        depackPackage: function(itemId){
+          this.packages = this.packages.map(x => {
+            x.is_packed = (x.id == itemId? false : x.is_packed);
+            return x;
+          });
+        },
+        packSelected(item){
+            item.is_packed= this.checked.includes(item.id) ?true: item.is_packed;
+            return item;
+        },
+        resetChecked(){
+          this.checked=[];
+        },
+        searchPackages(){
+          this.packages = (this.searchedText&& this.searchedText !== '')  ? this.packages.map(this.filterSearchText) : '';
+        },
+        filterSearchText(x){
+          x.is_hidden = x.name == this.searchedText ? false : true;
+          return x;
+        }
+    }
+  })
+</script>
